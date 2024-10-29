@@ -1,10 +1,10 @@
+// Remove the signupPage controller function and its module export. We no longer
+// need this page because our new login page will work both for logins and signups.
 
 const models = require('../models');
 
 const { Account } = models;
 const loginPage = (req, res) => res.render('login');
-
-const signupPage = (req, res) => res.render('signup');
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -46,7 +46,7 @@ const signup = async (req, res) => {
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
     req.session.account = Account.toAPI(newAccount);
-    
+
     return res.json({ redirect: '/maker' });
   } catch (err) {
     console.log(err);
@@ -59,7 +59,6 @@ const signup = async (req, res) => {
 
 module.exports = {
   loginPage,
-  signupPage,
   login,
   logout,
   signup,

@@ -1,5 +1,21 @@
+// check if github is ok and files**
+// should we put createdDate for all of our schemas on project**
 
-//check if github is ok and files**
+// React makes use of a special syntax known as JSX. JSX is not supported by any
+// modern browser, and so we need to use babel to convert it to actual ES6 that the
+// browser can use.
+// We will also want to install React and ReactDOM into the project to get access to the
+// features of the react library. These libraries will be bundled with our client side code
+// using webpack.
+
+// Remove the signup.handlebars view. We will no longer need this in our new
+// implementation.
+
+// The reason we no longer need this file is that we are moving to a structure with
+// dynamic views (what are dynamic views)**
+// We will be using React.js to create the appropriate view for us. The
+// login and signup will be on the same page, and will dynamically show up when
+// necessary (go over is this like show and hide with HTML elements)**
 
 require('dotenv').config();
 
