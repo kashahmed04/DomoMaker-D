@@ -21,7 +21,9 @@ const path = require('path');
 // By defining multiple entry points, webpack will create multiple bundles. For the output
 // filename, we use “[name]Bundle.js”. Webpack will pull in the name from the key in the
 // entry object, so we will generate appBundle.js and loginBundle.js.
-// do we use this to display the data or**
+// do we use this to display the data or is it to link the JSX files to the 
+// .handlebars page so we can use the specific elements in those files
+// to display the data**
 // we have two entry points right the app and the login**
 module.exports = {
     entry: {

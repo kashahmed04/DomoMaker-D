@@ -15,7 +15,8 @@ const handleError = (message) => {
 // export these functions from helper.js. Remember that we can use the same module
 // require syntax in our client code as we do in our server code because webpack will
 // convert the code for us.
-// this only works because of webpack right not in general**
+// this only works because of webpack right not in general to export our code
+// in client.js**
 // do we pass in a handler if there is a specific error but if there is not
 // we do not have to pass in handler when calling sendPost() from our JSX files
 // only** and we can use the default error handling in handleError()**
@@ -37,6 +38,8 @@ const sendPost = async (url, data, handler) => {
       window.location = result.redirect;
     }
   
+    //when would we get an error why do we add
+    //these error handlers with the JSX files**
     if(result.error) {
       handleError(result.error);
     }
@@ -47,7 +50,8 @@ const sendPost = async (url, data, handler) => {
     }
 };
 
-//why do we hide this twice if it's hidden by default in app.handlebars**
+//why do we hide this twice if it's hidden by default in app.handlebars
+//and login.handlebars**
 const hideError = () => {
     document.getElementById('domoMessage').classList.add('hidden');
 };

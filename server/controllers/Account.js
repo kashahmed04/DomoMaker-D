@@ -4,6 +4,8 @@
 const models = require('../models');
 
 const { Account } = models;
+//why do we need this still if we call the login page in login.JSX how does this work now
+//does it go to the .handlebars first or the login.JSX file first then the .handlebars file**
 const loginPage = (req, res) => res.render('login');
 
 const logout = (req, res) => {
@@ -11,6 +13,9 @@ const logout = (req, res) => {
   res.redirect('/');
 };
 
+//why do we not use async/await here or promises since we are working with the data
+//or is it only with editing/deleting/adding new data where we have use async/await or promises
+//and just reading data does not need it**
 const login = (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
@@ -24,6 +29,8 @@ const login = (req, res) => {
       return res.status(401).json({ error: 'Wrong username or password!' });
     }
     req.session.account = Account.toAPI(account);
+    //how does it know which /maker to go to since we have the GET and POST request for /maker**
+    //how does this work now since we have the JSX files**
     return res.json({ redirect: '/maker' });
   });
 };
@@ -45,6 +52,8 @@ const signup = async (req, res) => {
     const hash = await Account.generateHash(pass);
     const newAccount = new Account({ username, password: hash });
     await newAccount.save();
+    //what did it mean we had to duplicate this data for signup
+    //does this mean there are two usernames and _id's for the user**
     req.session.account = Account.toAPI(newAccount);
 
     return res.json({ redirect: '/maker' });

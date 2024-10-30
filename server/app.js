@@ -1,5 +1,10 @@
 // check if github is ok and files**
-// should we put createdDate for all of our schemas on project**
+// should we put createdDate for all of our schemas on project(yes)
+// should we have 404 page for all our errors on project
+// or different pages for different errors (send back JSON for other errors but render a 404 page)
+// whenever we need to contact database we have to use promise.then()
+// or async or await because it returns a promise
+// (like adding/deleting/reading data/changing state)
 
 // React makes use of a special syntax known as JSX. JSX is not supported by any
 // modern browser, and so we need to use babel to convert it to actual ES6 that the
@@ -16,6 +21,10 @@
 // We will be using React.js to create the appropriate view for us. The
 // login and signup will be on the same page, and will dynamically show up when
 // necessary (go over is this like show and hide with HTML elements)**
+
+// does react basically mix the JS and HTML for the client side 
+// and take some backend server code and move it to the client side
+// (front end) or what does it do**
 
 require('dotenv').config();
 
@@ -49,6 +58,7 @@ const redisClient = redis.createClient({
 
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
+//why do we put this all in redisClient (go over redis implementation)**
 redisClient.connect().then(() => {
   const app = express();
 
