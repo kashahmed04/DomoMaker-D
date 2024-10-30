@@ -22,7 +22,7 @@ const { Domo } = models;
 // This is a major improvement over our previous system that required the page to
 // reload.
 // what does dynamically mean**
-const makerPage = async (req, res) => res.render('app');
+const makerPage =  (req, res) => res.render('app');
 
 const getDomos = async (req, res) => {
   try {
@@ -51,7 +51,19 @@ const makeDomo = async (req, res) => {
   try {
     const newDomo = new Domo(domoData);
     await newDomo.save();
-    return res.json({ redirect: '/maker' });
+    // You will notice that when you add a domo, the entire page flickers before the new
+    // domo shows up in the list. This is because the page is reloading every time we create
+    // a domo, since that is what the makeDomo controller function tells it to do. We don’t
+    // want this happening, as it defeats the purpose of using React.
+
+    // Go to /server/controllers/Domo.js, and modify the makeDomo function. Rather than
+    // send a redirect command to the client on successful creation of a domo, we want to
+    // simply tell them it was a success by sending a 201 “Created” status code.
+
+    //so basically we just return a success status instead of reloading the page when
+    //a new domo is made because App() in maker.JSX already handles rereendering and reloading the page
+    //once a domo is created**
+    return res.status(201).json({name: newDomo.name, age: newDomo.age});
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {

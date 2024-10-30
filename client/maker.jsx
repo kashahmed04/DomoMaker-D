@@ -46,7 +46,7 @@ const handleDomo = (e, onDomoAdded) => {
 const DomoForm = (props) => {
     return(
         <form id="domoForm"
-            onSubmit={(e => handleDomo(e, props.triggerReload))}
+            onSubmit={(e) => handleDomo(e, props.triggerReload)}
             name="domoForm"
             action="/maker"
             method="POST"
@@ -116,3 +116,38 @@ const DomoList = (props) => {
         </div>
     );
 };
+
+
+// Now that we have our DomoForm and DomoList functions, we need a way to make
+// the DomoList’s effect rerender when the DomoForm submits something to the server.
+// To do that, we need a higher level component called <App>. Inside of app, we will
+// create a stateful variable called reloadDomos that is just a boolean. When we render
+// out our DomoForm, we create a triggerReload prop. It is a function that calls
+// setReloadDomos, and passes in the negation of reloadDomos that way it toggles it
+// every time it gets called. We also pass reloadDomos into the DomoList, which gets
+// used in it’s useEffect dependency list (there is no useEffect here)**
+// So every time DomoForm submits a new domo,
+// triggerReload inverts the reloadDomos Boolean, and the effect fires again because
+// the Boolean has changed. Then we render out the app component to the screen.
+// go over**
+const App = () => {
+    const [reloadDomos, setReloadDomos] = useState(false);
+
+    return(
+        <div>
+            <div id="makeDomo">
+                <DomoForm triggerReload={() => setReloadDomos(!reloadDomos)} />
+            </div>
+            <div id="domos">
+                <DomoForm domos={[]} reloadDomos={reloadDomos} />
+            </div>
+        </div>
+    );
+};
+
+const init = () => {
+    const root = createRoot(document.getElementById('app'));
+    root.render( <App /> )
+}
+
+window.onload = init;
