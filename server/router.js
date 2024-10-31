@@ -15,10 +15,9 @@ const router = (app) => {
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 
-  //we put the id in the pathname so we can delete based on the id of the domo
-  //in controller**
+  // we put the id in the pathname so we can delete based on the id of the domo
+  // in controller**
   app.delete('/deleteDomo/:id', mid.requiresLogin, controllers.Domo.deleteDomo);
-
 };
 
 module.exports = router;

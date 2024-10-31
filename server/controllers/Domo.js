@@ -76,33 +76,32 @@ const makeDomo = async (req, res) => {
   }
 };
 
-//is this ok**
-//go over how each connection works from router.js, controllers.js,
-//helper.js, and maker.JSX**
+// is this ok**
+// go over how each connection works from router.js, controllers.js,
+// helper.js, and maker.JSX**
 const deleteDomo = async (req, res) => {
-
-  //can we also define things within the try catch**
+  // can we also define things within the try catch**
   try {
-  //make sure we delete based on the user that is logged in (do we need this)**
-  const userId = req.session.account._id;
-  //get the domo id from the URL (pathname from router)**
-  const id = req.params.id;
+  // make sure we delete based on the user that is logged in (do we need this)**
+    const userId = req.session.account._id;
+    // get the domo id from the URL (pathname from router)**
+    const { id } = req.params;
 
-  // Find the Domo by ID and ensure it belongs to the current user
-  const domo = await Domo.findOne({ _id: id, owner: userId });
+    // Find the Domo by ID and ensure it belongs to the current user
+    const domo = await Domo.findOne({ _id: id, owner: userId });
 
-  if (!domo) {
+    if (!domo) {
       return res.status(404).json({ message: 'Domo not found' });
+    }
+
+    await Domo.findByIdAndDelete(id);
+
+    // 200 means successful deletion right**
+    return res.status(200).json({ message: 'Domo deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting Domo' });
   }
-
-  await Domo.findByIdAndDelete(id);
-
-  //200 means successful deletion right**
-  res.status(200).json({ message: 'Domo deleted successfully' });
-} catch (error) {
-  res.status(500).json({ message: 'Error deleting Domo' });
-}
-}
+};
 
 module.exports = {
   makerPage,

@@ -1,4 +1,8 @@
 // check if github is ok and files**
+// are delete functinonality and adding a level for domos ok**
+// check if heroku keys are ok**
+// I get an error if I press the delete buttons to fast is that ok (double taps sometimes
+// for the same domo)**
 // should we put createdDate for all of our schemas on project(yes)
 // should we have 404 page for all our errors on project
 // or different pages for different errors (send back JSON for other errors but render a 404 page)

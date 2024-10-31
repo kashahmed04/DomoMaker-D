@@ -66,14 +66,6 @@ const sendDelete = async (url, handler) => {
   }
 };
 
-module.exports = {
-  handleError,
-  sendPost,
-  sendDelete, // add sendDelete to the exported functions
-  hideError,
-  sendDelete,
-};
-
 
 //why do we hide this here and in the two methods above if it's hidden by default in app.handlebars
 //and login.handlebars**
@@ -82,7 +74,9 @@ const hideError = () => {
 };
   
 module.exports = {
-    handleError,
-    sendPost,
-    hideError,
-}
+  handleError,
+  sendPost,
+  sendDelete, // add sendDelete to the exported functions
+  hideError,
+};
+

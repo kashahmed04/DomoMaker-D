@@ -46,8 +46,8 @@ DomoSchema.statics.toAPI = (doc) => ({
   level: doc.level,
 });
 
-//what we want to data to be called then how each object is created
-//then we export the entire DomoModel to be able to create
-//DomoSchema objects and work with them**
+// what we want to data to be called then how each object is created
+// then we export the entire DomoModel to be able to create
+// DomoSchema objects and work with them**
 const DomoModel = mongoose.model('Domo', DomoSchema);
 module.exports = DomoModel;
