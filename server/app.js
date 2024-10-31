@@ -22,8 +22,8 @@
 // login and signup will be on the same page, and will dynamically show up when
 // necessary (go over is this like show and hide with HTML elements)**
 
-// does react basically mix the JS and HTML for the client side 
-// and take some backend server code and move it to the client side
+// does react basically mix the JS and HTML for the client side
+// and take some back end server code and move it to the client side
 // (front end) or what does it do**
 
 require('dotenv').config();
@@ -58,7 +58,7 @@ const redisClient = redis.createClient({
 
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-//why do we put this all in redisClient (go over redis implementation)**
+// why do we put this all in redisClient (go over redis implementation)**
 redisClient.connect().then(() => {
   const app = express();
 

@@ -27,6 +27,7 @@ const React = require('react');
 const {createRoot} = require('react-dom/client');
 
 const handleLogin = (e) => {
+    //do we usually say hideError for all of our functions in JSX**
     e.preventDefault();
     helper.hideError();
 
@@ -94,7 +95,7 @@ const handleSignup = (e) => {
 // why do we still need the action is it because we still use it in the server
 // and in router.js to go to specific methods and we put this
 // into the content section in the .handlebars files where it then
-// gets used in the server for the pathname or how does it work**
+// gets used in the server for the pathname in router.js or how does it work**
 // why do we not have action in the handlebars files anymore**
 const LoginWindow = (props) => {
     return(
@@ -150,6 +151,8 @@ const SignupWindow = (props) => {
 // Root to render things.
 const init = () => {
 
+    //is the homepage part of the logina dn sign up
+    //thats why we have buttons if we want to login or signup**
     const loginButton = document.getElementById('loginButton');
     const signupButton = document.getElementById('signupButton');
 

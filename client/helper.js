@@ -50,7 +50,32 @@ const sendPost = async (url, data, handler) => {
     }
 };
 
-//why do we hide this twice if it's hidden by default in app.handlebars
+const sendDelete = async (url, handler) => {
+  const response = await fetch(url, {
+      method: 'DELETE',
+  });
+  const result = await response.json();
+
+  if (result.error) {
+      handleError(result.error);
+      return;
+  }
+
+  if (handler) {
+      handler(result);
+  }
+};
+
+module.exports = {
+  handleError,
+  sendPost,
+  sendDelete, // add sendDelete to the exported functions
+  hideError,
+  sendDelete,
+};
+
+
+//why do we hide this here and in the two methods above if it's hidden by default in app.handlebars
 //and login.handlebars**
 const hideError = () => {
     document.getElementById('domoMessage').classList.add('hidden');

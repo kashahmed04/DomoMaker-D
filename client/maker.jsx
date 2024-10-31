@@ -21,17 +21,19 @@ const handleDomo = (e, onDomoAdded) => {
 
     const name = e.target.querySelector('#domoName').value;
     const age = e.target.querySelector('#domoAge').value;
+    const level = e.target.querySelector('#domoLevel').value;
 
     //go over what we pass in and why we call handleError above
     //if it gets called in sendPost()**
     //why do we need the check in sendPost then**
-    if(!name || !age){
+    if(!name || !age || !level){
         helper.handleError('All fields are required');
         return false;
     }
 
-    //go over (what is e.target.action)**
-    helper.sendPost(e.target.action, {name, age}, onDomoAdded);
+    //go over (what is e.target.action) and why do we add
+    //a third parameter here now but not in login.JSX**
+    helper.sendPost(e.target.action, {name, age, level}, onDomoAdded);
     return false;
 
 }
@@ -43,6 +45,9 @@ const handleDomo = (e, onDomoAdded) => {
 // pass down when we render the component to help us know when to reload the domos
 // from the server (go over)(we never say root.render like we do
 // in login.JSX)**
+// usually use the (e) event since this data can change or when do we use the (e)
+// or not because we did not use it in login.JSX**
+// what does the second parameter in handleDomo do**
 const DomoForm = (props) => {
     return(
         <form id="domoForm"
@@ -57,6 +62,8 @@ const DomoForm = (props) => {
             <input id="domoName" type="text" name="name" placeholder="Domo Name" />
             <label htmlFor="age">Age: </label>
             <input id="domoAge" type="number" min="0" name="age" />
+            <label htmlFor="level">Level: </label>
+            <input id="domoLevel" type="number" min="0" name="level" />
             <input className="makeDomoSubmit" type="submit" value="Make Domo" />
 
         </form>
@@ -69,13 +76,17 @@ const DomoForm = (props) => {
 // updates the state. 3) That useEffect hook has props.reloadDomos as a dependency in
 // it’s dependency list. This means whenever that variable changes, we will load the
 // domos from the server again. We will update this variable using the 2 nd parameter of
-// handleDomo (onDomoAdded)** (which we already started hooking up).
+// handleDomo (onDomoAdded) (we never call handleDomo here)** (which we already started hooking up).
 // go over**
 const DomoList = (props) => {
     //where do we set setDomos**
     //go over**
     //what is props.domos because we never do a root.render with the <>
-    //and the attribute within the <>**
+    //and the attribute within the <> in init**
+    //is setDomos a function we make different each time we use it because
+    //we first make it get the list of domos then in the delete
+    //we filter out the domo we deleted based on the id then update the array
+    //of domos (the domos variable)**
     const [domos, setDomos] = useState(props.domos);
 
     useEffect(() => {
@@ -86,6 +97,22 @@ const DomoList = (props) => {
         };
         loadDomosFromServer();
     }, [props.reloadDomos]);
+
+    const handleDelete = async (id) => {
+        helper.sendDelete(`/deleteDomo/${id}`, (result) => {
+            // If result.message exists (successfult)**
+            // setDomos is called to update the components 
+            // state by removing the deleted Domo from the list of domos
+            // setDomos(domos.filter((domo) => domo._id !== id)); 
+            // filters out the Domo with the matching _id, 
+            // creating a new array without it setDomos then
+            // updates the state to re-render the component 
+            // with the updated list of domos
+            if(result.message){
+                setDomos(domos.filter((domo) => domo._id !== id));
+            }
+        });
+    }
 
     //when we have no domos**
     if(domos.length === 0){
@@ -100,11 +127,13 @@ const DomoList = (props) => {
     const domoNodes = domos.map(domo => {
         return(
             //each domo has an id based on the session or is it when we 
-            //connected the _id in account.js in models and controllers with the username**
+            //connected the _id in account.js in models and controllers with the username
+            //and why do we not say .session.account._id**
             <div key={domo.id} className="domo">
                 <img src="assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className="domoName">Name: {domo.name}</h3>
                 <h3 className="domoAge">Age: {domo.age}</h3>
+                <h3 className="domoLevel">Age: {domo.level}</h3>
             </div>
         );
     });
