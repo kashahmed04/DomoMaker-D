@@ -1,6 +1,11 @@
 // check if github is ok and files**
-// are delete functinonality and adding a level for domos ok**
+// are delete functinonality and adding a level for domos ok
+// and not reloading the page for those**
 // check if heroku keys are ok**
+// how do I fix the CSS to have the textboxes show up after each label**
+// can make name numbers now even though we are not supposed to**
+// is it ok for client side to show entering a number instead of a letter for age
+// and level**
 // I get an error if I press the delete buttons to fast is that ok (double taps sometimes
 // for the same domo)**
 // should we put createdDate for all of our schemas on project(yes)

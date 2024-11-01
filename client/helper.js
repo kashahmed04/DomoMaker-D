@@ -76,7 +76,7 @@ const hideError = () => {
 module.exports = {
   handleError,
   sendPost,
-  sendDelete, // add sendDelete to the exported functions
+  sendDelete,
   hideError,
 };
 

@@ -45,7 +45,7 @@ const handleLogin = (e) => {
     //what is e.target.action an e.target.value**
     //the data (second parameter) gets turned into a JSON
     //object so the server can work with the the data
-    //then we get that back from the server in the result
+    //then we get that back from the server in the result as a JSON since we convert
     //and work with it in sendPost to redirect the user
     //or return an error**
     helper.sendPost(e.target.action, {username, pass});

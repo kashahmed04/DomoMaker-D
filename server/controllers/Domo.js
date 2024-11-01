@@ -94,6 +94,7 @@ const deleteDomo = async (req, res) => {
       return res.status(404).json({ message: 'Domo not found' });
     }
 
+    //can we use this**
     await Domo.findByIdAndDelete(id);
 
     // 200 means successful deletion right**

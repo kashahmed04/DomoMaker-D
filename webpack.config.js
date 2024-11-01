@@ -25,6 +25,9 @@ const path = require('path');
 // .handlebars page so we can use the specific elements in those files
 // to display the data**
 // we have two entry points right the app and the login**
+// we say the name of the handlebars file then
+// the JSX file we want to conenct it with right**
+// can we do this on our project too with having a handlebars file**
 module.exports = {
     entry: {
         app: './client/maker.jsx',

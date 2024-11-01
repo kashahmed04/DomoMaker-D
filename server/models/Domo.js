@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-// go over**
+//if someone gives the name with spaces before and after the name 
+//and the esscape part is important becuase in JS strings are used as 'name'
+//if someone submits the name it just makes everything part of the string
+//instead of rendering some as JS because then someone could access our data
+//an we should use this for names for the project (things that are already strings)**
 const _ = require('underscore');
 
 const setName = (name) => _.escape(name).trim();
@@ -39,7 +43,8 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-// we never used this**
+//we do not use this but it would be useful
+//if we wanted to return a domo based on the name and age
 DomoSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,

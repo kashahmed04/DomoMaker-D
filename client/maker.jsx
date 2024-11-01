@@ -14,7 +14,9 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-
+//when we call senPost it foes the action which is the /maker
+//then it makes the domo and sends it back to sendPost then the handler
+//is used which just triggers a reload with the process down below
 const handleDomo = (e, onDomoAdded) => {
     e.preventDefault();
     helper.hideError();
@@ -48,9 +50,13 @@ const handleDomo = (e, onDomoAdded) => {
 // usually use the (e) event since this data can change or when do we use the (e)
 // or not because we did not use it in login.JSX**
 // what does the second parameter in handleDomo do**
+// there are no props in init so how does this work**
 const DomoForm = (props) => {
     return(
         <form id="domoForm"
+        //when we press submit then we change the value of reloadDomos which then triggers the useEffect
+        //because of the [] then we can change the list of domos according to if we change
+        //the boolean value
             onSubmit={(e) => handleDomo(e, props.triggerReload)}
             name="domoForm"
             action="/maker"
@@ -78,6 +84,8 @@ const DomoForm = (props) => {
 // domos from the server again. We will update this variable using the 2 nd parameter of
 // handleDomo (onDomoAdded) (we never call handleDomo here)** (which we already started hooking up).
 // go over**
+// there are no props. in init so how does this work or can it be anywhere 
+// as long as we have an attribute within the <>**
 const DomoList = (props) => {
     //where do we set setDomos**
     //go over**
@@ -108,6 +116,7 @@ const DomoList = (props) => {
             // creating a new array without it setDomos then
             // updates the state to re-render the component 
             // with the updated list of domos
+            // we use this within this function if we want to edit the list of domos**
             if(result.message){
                 setDomos(domos.filter((domo) => domo._id !== id));
             }
@@ -140,6 +149,7 @@ const DomoList = (props) => {
     });
 
     //when does this case get used because we already have a return above**
+    //this shows the list of domos and above we map each domo to have these values in them
     return(
         <div className="domoList">
             {domoNodes}
@@ -160,6 +170,14 @@ const DomoList = (props) => {
 // triggerReload inverts the reloadDomos Boolean, and the effect fires again because
 // the Boolean has changed. Then we render out the app component to the screen.
 // go over**
+// why do we not pass in props here**
+// how do we know when to pass in props**
+
+//anywhere we set the attribute we can use with props.
+//and this says if there is a change then go useEffect (go to use effect is within the
+//[]) and update the domos
+//and since the domos variable changes the map relies on that list
+//so the list of domos updates as well on the browser
 const App = () => {
     const [reloadDomos, setReloadDomos] = useState(false);
 
